@@ -51,24 +51,16 @@ class RunningMedian(object):
 
         elif self.minh.size() == self.maxh.size():
             # append to self.maxh
-            if x < self.maxh.peep():
-                self.maxh.push(x)
-            elif x > self.minh.peep():
+            if x > self.minh.peep():
                 self.minh.push(x)
                 x = self.minh.pop()
-                self.maxh.push(x)
-            else:
-                self.maxh.push(x)
+            self.maxh.push(x)
         else:
             # append to self.minh
             if x < self.maxh.peep():
                 self.maxh.push(x)
                 x = self.maxh.pop()
-                self.minh.push(x)
-            elif x > self.minh.peep():
-                self.minh.push(x)
-            else:
-                self.minh.push(x)
+            self.minh.push(x)
 
         self.sum += self.getMedian()
 
