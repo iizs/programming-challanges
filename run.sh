@@ -5,33 +5,35 @@ if [ z"$1" == 'z' ]; then
     exit
 fi
 
-if [ ! -d $1 ]; then
-    echo "'$1' not found"
+MODULE=`basename "$1"`
+
+if [ ! -d ${MODULE} ]; then
+    echo "'${MODULE}' not found"
     exit
 fi
 
 BIN=
-if [ -e $1/$1.py ]; then
-    BIN="python $1/$1.py"
-elif [ -e $1/$1.c ]; then
-    gcc -Wall -o $1/$1.bin $1/$1.c || exit 1
-    BIN="$1/$1.bin"
+if [ -e ${MODULE}/${MODULE}.py ]; then
+    BIN="python ${MODULE}/${MODULE}.py"
+elif [ -e ${MODULE}/${MODULE}.c ]; then
+    gcc -Wall -o ${MODULE}/${MODULE}.bin ${MODULE}/${MODULE}.c || exit 1
+    BIN="${MODULE}/${MODULE}.bin"
 fi
 
 if [ z"${BIN}" == 'z' ]; then
-    echo "'$1' not implemented"
+    echo "'${MODULE}' not implemented"
     exit
 fi
 
-if [ -e $1/$1.in ]; then
-    if [ -e $1/$1.out ]; then
-        ${BIN} < $1/$1.in > $1/$1.stdout || exit 1
-        diff $1/$1.out $1/$1.stdout
+if [ -e ${MODULE}/${MODULE}.in ]; then
+    if [ -e ${MODULE}/${MODULE}.out ]; then
+        ${BIN} < ${MODULE}/${MODULE}.in > ${MODULE}/${MODULE}.stdout || exit 1
+        diff ${MODULE}/${MODULE}.out ${MODULE}/${MODULE}.stdout
     else
-        ${BIN} < $1/$1.in || exit 1
+        ${BIN} < ${MODULE}/${MODULE}.in || exit 1
     fi
 else
-    echo "'$1' has no inputfile"
+    echo "'${MODULE}' has no inputfile"
     exit
 fi
 
