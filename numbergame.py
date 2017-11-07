@@ -1,14 +1,21 @@
 import sys
 
 rl = lambda: sys.stdin.readline()
+cache = {}
 
 def findBest(l, gap):
+    global cache
     gap = -1 * gap;
 
     if len(l) == 0:
         return -1 * gap
     elif len(l) == 1:
         return -1 * ( gap + l[0] )
+
+    # lookup cache
+    key = ' '.join(str(e) for e in l)
+    if key in cache:
+        return -1 * ( cache[key] + gap )
 
     # 1.1 get left most value
     c_gap = findBest( l[1:],  gap + l[0] )
@@ -25,6 +32,9 @@ def findBest(l, gap):
     c_gap = findBest( l[:-2],  gap )
     if n_gap < c_gap:
         n_gap = c_gap
+
+    # store to cache
+    cache[key] = n_gap - gap;
 
     return -1 * n_gap
 
