@@ -10,18 +10,18 @@ def findBest(l, gap):
     if len(l) == 0:
         return -1 * gap
     elif len(l) == 1:
-        return -1 * ( gap + l[0] )
+        return -1 * ( gap + int(l[0]) )
 
     # lookup cache
-    key = ' '.join(str(e) for e in l)
+    key = ' '.join(l)
     if key in cache:
         return -1 * ( cache[key] + gap )
 
     # 1.1 get left most value
-    c_gap = findBest( l[1:],  gap + l[0] )
+    c_gap = findBest( l[1:],  gap + int(l[0]) )
     n_gap = c_gap
     # 1.2 get right most value
-    c_gap = findBest( l[:-1], gap + l[-1] )
+    c_gap = findBest( l[:-1], gap + int(l[-1]) )
     if n_gap < c_gap:
         n_gap = c_gap
     # 2.1 remove left 2 values
@@ -43,5 +43,5 @@ n_sets = int(rl())
 
 for i in range(n_sets):
     n_nums = int(rl())
-    l_nums = [int(s) for s in rl().strip().split(' ')[0:n_nums]]
+    l_nums = rl().strip().split(' ')[0:n_nums]
     print -1 * findBest(l_nums, 0)
