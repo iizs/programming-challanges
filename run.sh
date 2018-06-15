@@ -19,7 +19,7 @@ elif [ -e ${MODULE}/${MODULE}.c ]; then
     gcc -Wall -o ${MODULE}/${MODULE}.bin ${MODULE}/${MODULE}.c || exit 1
     BIN="${MODULE}/${MODULE}.bin"
 elif [ -e ${MODULE}/Main.java ]; then
-    javac ${MODULE}/Main.java
+    javac -Xlint ${MODULE}/Main.java
     BIN="java -classpath ${MODULE} Main"
 fi
 
