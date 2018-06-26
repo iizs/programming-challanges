@@ -5,38 +5,39 @@ if [ z"$1" == 'z' ]; then
     exit
 fi
 
+DIRNAME="$1"
 MODULE=`basename "$1"`
 
-if [ ! -d ${MODULE} ]; then
-    echo "'${MODULE}' not found"
+if [ ! -d ${DIRNAME} ]; then
+    echo "'${DIRNAME}' not found"
     exit
 fi
 
 BIN=
-if [ -e ${MODULE}/${MODULE}.py ]; then
-    BIN="python ${MODULE}/${MODULE}.py"
-elif [ -e ${MODULE}/${MODULE}.c ]; then
-    gcc -Wall -o ${MODULE}/${MODULE}.bin ${MODULE}/${MODULE}.c || exit 1
-    BIN="${MODULE}/${MODULE}.bin"
-elif [ -e ${MODULE}/Main.java ]; then
-    javac -Xlint ${MODULE}/Main.java
-    BIN="java -classpath ${MODULE} Main"
+if [ -e ${DIRNAME}/${MODULE}.py ]; then
+    BIN="python ${DIRNAME}/${MODULE}.py"
+elif [ -e ${DIRNAME}/${MODULE}.c ]; then
+    gcc -Wall -o ${DIRNAME}/${MODULE}.bin ${DIRNAME}/${MODULE}.c || exit 1
+    BIN="${DIRNAME}/${MODULE}.bin"
+elif [ -e ${DIRNAME}/Main.java ]; then
+    javac -Xlint ${DIRNAME}/Main.java
+    BIN="java -classpath ${DIRNAME} Main"
 fi
 
 if [ z"${BIN}" == 'z' ]; then
-    echo "'${MODULE}' not implemented"
+    echo "'${DIRNAME}' not implemented"
     exit
 fi
 
-if [ -e ${MODULE}/${MODULE}.in ]; then
-    if [ -e ${MODULE}/${MODULE}.out ]; then
-        ${BIN} < ${MODULE}/${MODULE}.in > ${MODULE}/${MODULE}.stdout || exit 1
-        diff ${MODULE}/${MODULE}.out ${MODULE}/${MODULE}.stdout
+if [ -e ${DIRNAME}/${MODULE}.in ]; then
+    if [ -e ${DIRNAME}/${MODULE}.out ]; then
+        ${BIN} < ${DIRNAME}/${MODULE}.in > ${DIRNAME}/${MODULE}.stdout || exit 1
+        diff ${DIRNAME}/${MODULE}.out ${DIRNAME}/${MODULE}.stdout
     else
-        ${BIN} < ${MODULE}/${MODULE}.in || exit 1
+        ${BIN} < ${DIRNAME}/${MODULE}.in || exit 1
     fi
 else
-    echo "'${MODULE}' has no inputfile"
+    echo "'${DIRNAME}' has no inputfile"
     exit
 fi
 
