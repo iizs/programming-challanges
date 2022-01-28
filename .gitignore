@@ -3,3 +3,5 @@
 *.pyc
 *.stdout
 *.class
+venv
+.idea
