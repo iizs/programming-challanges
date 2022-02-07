@@ -1,8 +1,14 @@
 # -*- coding: utf-8 -*-
 import math
+import sys
 
 
 def count_n_upto(n, to):
+    if to == 0:
+        if n == 0:
+            return 1
+        else:
+            return 0
     cnt = 0
     p = int(math.log10(to))  # 자릿수
     dividend = to + 1
@@ -20,10 +26,17 @@ def count_n_upto(n, to):
             quotient_2 = remainder_1 // 10 ** o
             remainder_2 = remainder_1 % 10 ** o
             cnt += quotient_1 * (10 ** o)
+
             if quotient_2 > n:
                 cnt += 10 ** o
             elif quotient_2 == n:
                 cnt += remainder_2
+
+            if n == 0:
+                if quotient_1 > 0 or quotient_2 > 0:
+                    cnt -= 10 ** o
+                else:
+                    cnt -= remainder_2
 
     return cnt
 
@@ -34,19 +47,6 @@ def count(n, a, b):
     return count_n_upto(n, b) - count_n_upto(n, a - 1)
 
 
-"""
 for line in sys.stdin:
     p = line.split(' ')
     print(count(int(p[2]), int(p[0]), int(p[1])))
-"""
-print(count_n_upto(1, 100))
-
-for limit in range(1, 10000):
-    cnt_dict = {num: 0 for num in range(0, 10)}
-    for it in range(0, limit + 1):
-        for char in str(it):
-            cnt_dict[int(char)] += 1
-
-    for num in range(1, 10):
-        assert count_n_upto(num, limit) == cnt_dict[num], \
-            f'{num}, {limit}: {count_n_upto(num, limit)} != {cnt_dict[num]}'
