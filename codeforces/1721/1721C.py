@@ -2,13 +2,23 @@ import sys
 
 
 def able_to_fill(list_a, list_b, a, b):
-    l_a = list(list_a)
-    l_b = list(list_b)
-    l_a.remove(a)
-    l_b.remove(b)
-    for (item_a, item_b) in zip(l_a, l_b):
-        if item_a > item_b:
+    a_skipped = False
+    b_skipped = False
+    a_idx = 0
+    b_idx = 0
+    while a_idx < len(list_a) and b_idx < len(list_b):
+        if not a_skipped and a == list_a[a_idx]:
+            a_idx += 1
+            a_skipped = True
+            continue
+        if not b_skipped and b == list_b[b_idx]:
+            b_idx += 1
+            b_skipped = True
+            continue
+        if list_a[a_idx] > list_b[b_idx]:
             return False
+        a_idx += 1
+        b_idx += 1
     return True
 
 
