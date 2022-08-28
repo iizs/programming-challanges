@@ -24,19 +24,19 @@ for i in range(n):
             if b >= a:
                 list_d_min.append(b - a)
                 break
-    list_d_max_reversed = []
-    list_a_reversed = list(list_a)
-    list_a_reversed.reverse()
-    list_b_reversed = list(list_b)
-    list_b_reversed.reverse()
-    for a in list_a_reversed:
-        for b in list_b_reversed:
+
+    # Warning. lists will be in revered form
+    list_d_max = []
+    list_a.reverse()
+    list_b.reverse()
+    for a in list_a:
+        for b in list_b:
             if able_to_fill(list_a, list_b, a, b):
-                list_d_max_reversed.append(b - a)
+                list_d_max.append(b - a)
                 break
 
-    list_d_max_reversed.reverse()
+    list_d_max.reverse()
     # print(list_a)
     # print(list_b)
     print(' '.join([str(s) for s in list_d_min]))
-    print(' '.join([str(s) for s in list_d_max_reversed]))
+    print(' '.join([str(s) for s in list_d_max]))
