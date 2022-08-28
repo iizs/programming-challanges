@@ -19,20 +19,34 @@ for i in range(n):
     list_a = [int(c) for c in sys.stdin.readline().strip().split()]
     list_b = [int(c) for c in sys.stdin.readline().strip().split()]
     list_d_min = []
+    prev_a = None
+    prev_d = None
     for a in list_a:
+        if prev_a is not None and prev_a == a:
+            list_d_min.append(prev_d)
+            continue
         for b in list_b:
             if b >= a:
                 list_d_min.append(b - a)
+                prev_a = a
+                prev_d = b - a
                 break
 
     # Warning. lists will be in revered form
     list_d_max = []
     list_a.reverse()
     list_b.reverse()
+    prev_a = None
+    prev_d = None
     for a in list_a:
+        if prev_a is not None and prev_a == a:
+            list_d_max.append(prev_d)
+            continue
         for b in list_b:
             if able_to_fill(list_a, list_b, a, b):
                 list_d_max.append(b - a)
+                prev_a = a
+                prev_d = b - a
                 break
 
     list_d_max.reverse()
