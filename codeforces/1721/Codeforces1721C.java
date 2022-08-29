@@ -11,24 +11,24 @@ public class Codeforces1721C {
     public static boolean ableToFill(int[] list_a, int[] list_b, int a, int b) {
         boolean skipped_a = false;
         boolean skipped_b = false;
-        int idx_a = 0;
-        int idx_b = 0;
-        while (idx_a < list_a.length && idx_b < list_b.length) {
+        int idx_a = list_a.length - 1;
+        int idx_b = list_b.length - 1;
+        while (idx_a >= 0 && idx_b >= 0) {
             if ( !skipped_a && a == list_a[idx_a] ) {
-                idx_a += 1;
+                idx_a -= 1;
                 skipped_a = true;
                 continue;
             }
             if ( !skipped_b && b == list_b[idx_b] ) {
-                idx_b += 1;
+                idx_b -= 1;
                 skipped_b = true;
                 continue;
             }
             if (list_a[idx_a] > list_b[idx_b]) {
                 return false;
             }
-            idx_a += 1;
-            idx_b += 1;
+            idx_a -= 1;
+            idx_b -= 1;
         }
         return true;
     }
