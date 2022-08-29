@@ -50,12 +50,12 @@ class Node {
 
 }
 
-public class Main {
+public class AlgospotScoreboard {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int cases = sc.nextInt();
         while(cases-- > 0) {
-            Main.solver(sc);
+            AlgospotScoreboard.solver(sc);
         }
     }
 
@@ -70,7 +70,7 @@ public class Main {
         for (String name: names) {
             List<String> subNames = new ArrayList<>(names);
             subNames.remove(name);
-            min = Math.min(min, Main.findMinimumAbbr(subNames));
+            min = Math.min(min, AlgospotScoreboard.findMinimumAbbr(subNames));
         }
 
         System.out.println(min);

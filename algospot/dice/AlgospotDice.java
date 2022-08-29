@@ -1,17 +1,11 @@
 import java.util.Map;
 import java.util.HashMap;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.List;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.Scanner;
-import java.util.Iterator;
 
 //public 
 
-public class Main {
+public class AlgospotDice {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         while(sc.hasNext()) {
@@ -19,7 +13,7 @@ public class Main {
             if ( count == 0 ) {
                 break;
             }
-            System.out.println( String.format( "%.5f", Main.dice(count, sc)) );
+            System.out.println( String.format( "%.5f", AlgospotDice.dice(count, sc)) );
         }
     }
 
