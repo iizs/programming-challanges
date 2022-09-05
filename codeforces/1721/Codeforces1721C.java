@@ -45,18 +45,47 @@ public class Codeforces1721C {
             }
         }
 
-        //Codeforces1721C.printList(list_a);
-        //Codeforces1721C.printList(list_b);
+        Codeforces1721C.printList(list_a);
+        Codeforces1721C.printList(list_b);
         //Codeforces1721C.printList(list_able_to_map_from);
         //Codeforces1721C.printList(list_able_to_map_until);
         Codeforces1721C.printList(list_d_min);
         //Codeforces1721C.printList(list_d_max);
-        Codeforces1721C.printList(list_d_max);
+        //Codeforces1721C.printList(list_d_max);
         //System.out.println("----");
     }
 
     public static void v2(int size, int[] list_a, int[] list_b) {
+        int[] list_d_min = new int[size];
+        int[] list_d_max = new int[size];
 
+        int idx_a = 0;
+        int idx_b = 0;
+        int idx_d_min = 0;
+        int b_min = list_b[idx_b];
+        while (idx_a < list_a.length && idx_b < list_b.length) {
+            if (list_a[idx_a] > list_b[idx_b]) {
+                while (idx_d_min < list_d_min.length && idx_d_min<idx_a) {
+                    list_d_min[idx_d_min] = b_min - list_a[idx_d_min];
+                    ++idx_d_min;
+                }
+                ++idx_b;
+                b_min = list_b[idx_b];
+            } else {
+                ++idx_a;
+            }
+        }
+        if (idx_d_min < list_b.length) {
+            while (idx_d_min < list_d_min.length) {
+                list_d_min[idx_d_min] = b_min - list_a[idx_d_min];
+                ++idx_d_min;
+
+            }
+        }
+
+        Codeforces1721C.printList(list_d_min);
+        Codeforces1721C.printList(list_d_max);
+        System.out.println("----");
     }
 
     public static void main(String[] args) {
