@@ -75,16 +75,13 @@ public class Codeforces1721C {
                 ++idx_a;
             }
         }
-        if (idx_d_min < list_b.length) {
-            while (idx_d_min < list_d_min.length) {
-                list_d_min[idx_d_min] = b_min - list_a[idx_d_min];
-                ++idx_d_min;
-
-            }
+        // fill remaining list_d_min
+        for (; idx_d_min < list_b.length; ++idx_d_min) {
+            list_d_min[idx_d_min] = b_min - list_a[idx_d_min];
         }
 
         Codeforces1721C.printList(list_d_min);
-        Codeforces1721C.printList(list_d_max);
+        //Codeforces1721C.printList(list_d_max);
         System.out.println("----");
     }
 
