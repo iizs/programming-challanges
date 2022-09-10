@@ -67,6 +67,54 @@ public class Codeforces1721C {
         //System.out.println("----");
     }
 
+    // Porting GargYogesh's C++ code to Java
+    public static void v3(int size, int[] list_a, int[] list_b) {
+        int[] list_d_min = new int[size];
+        int[] list_d_max = new int[size];
+
+        if(size==1)
+        {
+            list_d_min[0] = list_b[0] - list_a[0];
+            list_d_max[0] = list_b[0] - list_a[0];
+        }
+        else{
+            int ind2 = 0;
+            int ind1 = 0;
+
+            while(ind2 < size && ind1 < size)
+            {
+                if(list_b[ind2]>=list_a[ind1])
+                {
+                    list_d_min[ind1] = list_b[ind2] - list_a[ind1];
+                    ind1++;
+                }
+                else {
+                    ind2++;
+                }
+            }
+
+            ind1 = size - 1;
+            ind2 = size - 1;
+            while ( ind1 >= 0 )
+            {
+                if(ind1==size-1)
+                {
+                    list_d_max[ind1]=list_b[ind2]-list_a[ind1];
+                }
+                else{
+                    if(list_a[ind1+1]>list_b[ind1])
+                    {
+                        ind2=ind1;
+                    }
+                    list_d_max[ind1]=list_b[ind2]-list_a[ind1];
+                }
+                ind1--;
+            }
+        }
+        Codeforces1721C.printList(list_d_min);
+        Codeforces1721C.printList(list_d_max);
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -87,7 +135,8 @@ public class Codeforces1721C {
                 list_b[j] = sc.nextInt();
             }
 
-            v2(size, list_a, list_b);
+            //v2(size, list_a, list_b);
+            v3(size, list_a, list_b);
 
 
         }
